@@ -1,0 +1,22 @@
+allprojects {
+    apply plugin: 'java-library'
+    group = 'com.example'
+    version = "$version"
+
+
+    pluginManager.withPlugin("java-library") {
+        dependencies {
+            implementation platform('io.quarkus.platform:quarkus-bom:2.16.3.Final')
+
+            compileOnly "org.projectlombok:lombok:1.18.24"
+            annotationProcessor "org.projectlombok:lombok:1.18.22"
+            testCompileOnly "org.projectlombok:lombok:1.18.22"
+            testAnnotationProcessor "org.projectlombok:lombok:1.18.22"
+        }
+
+        test {
+            systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+            useJUnitPlatform()
+        }
+    }
+}
